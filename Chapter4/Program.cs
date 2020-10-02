@@ -11,30 +11,59 @@ namespace Chapter4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(GetProduct());
-        }
-
-        private static string GetProduct()
-        {
-            Sale sale = new Sale()
+             var dates = new YearMonth[] 
             {
-                ShopName = "pet store",
-                Amount = 10000,
-                Product = "food",
+            new YearMonth(1999, 5),
+            new YearMonth(1999, 3),
+            new YearMonth(1999, 10),
+            new YearMonth(1999, 8),
+            new YearMonth(1999, 12),
             };
-            sale = null;
-            return sale?.Product;
+
+            foreach (var x in dates)
+            {
+                Console.WriteLine(x.ToString());
+            }
+            Console.WriteLine("");
+
+            Console.WriteLine("--- 4.2.3 ---");
+            Console.WriteLine(Is21CenturyYear(dates));
+            Console.WriteLine("");
+
+            Console.WriteLine("--- 4.2.4 ---");
+            if (Is21CenturyYear(dates) == null)
+                Console.WriteLine("21世紀のデータはありません。");
+            else
+                Console.WriteLine($"{Is21CenturyYear(dates)}は21世紀です。");
+            Console.WriteLine("");
+
+            //var s = dates == null ? "21世紀のデータはありません。" : dates.ToString();
+            //Console.WriteLine(s);
+
+            Console.WriteLine("--- 4.2.5 ---");
+            Exercise2_5(dates);
+            Console.WriteLine("");
+
         }
 
-    }
+        private static YearMonth Is21CenturyYear(YearMonth[] years)
+        {
+            foreach (var item in years)
+            {
+                if (item.Is21Century)
+                    return item;
+            }
+            return null;
+        }
 
-    class Sale
-    {
-        //店舗名
-        public string ShopName { get; set; }
-        //売上高
-        public int Amount { get; set; }        
-        public string Product { get; set; }
+        // 4.2.5
+        private static void Exercise2_5(YearMonth[] myCollection)
+        {
+            var array = myCollection.Select(m => m.AddOneMonth()).ToArray();
+            foreach (var item in array)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
-
 }
