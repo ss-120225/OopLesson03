@@ -68,39 +68,66 @@ namespace Chapter7
             //{
             //    Console.WriteLine(item);
             //}
-            #endregion
+            #endregion        
 
-            DuplicateKeySample();
+            //DuplicateKeySample();
+
+            Console.WriteLine("*****7.1.1*****");
+            string text = "Cozy lummox gives smart squid who asks for job pen";
+            
         }
+        #region
+        //static public void DuplicateKeySample()
+        //{
+        //    Console.WriteLine("***************\n**辞書登録**\n***************");
 
-        static public void DuplicateKeySample()
-        {
-            // ディクショナリの初期化
-            var dict = new Dictionary<string, List<string>>() {
-               { "PC", new List<string> { "パーソナル コンピュータ", "プログラム カウンタ", } },
-               { "CD", new List<string> { "コンパクト ディスク", "キャッシュ ディスペンサー", } },
-            };
+        //    // ディクショナリの初期化
+        //    var dict = new Dictionary<string, List<string>>();
 
-            // ディクショナリに追加
-            var key = "EC";
-            var value = "電子商取引";
-            if (dict.ContainsKey(key))
-            {
-                dict[key].Add(value);
-            }
-            else
-            {
-                dict[key] = new List<string> { value };
-            }
-
-            // ディクショナリの内容を列挙
-            foreach (var item in dict)
-            {
-                foreach (var term in item.Value)
-                {
-                    Console.WriteLine("{0} : {1}", item.Key, term);
-                }
-            }
-        }
+        //    do
+        //    {
+        //        Console.Write("\n1. 登録　　2. 表示     3.終了\n数値を入力してください：");
+        //        int.TryParse(Console.ReadLine(), out int flag);
+        //        if (flag == 0)
+        //            break;
+        //        if (flag == 1)
+        //        {
+        //            // ディクショナリに追加
+        //            Console.Write("Keyを入力:");
+        //            var key = Console.ReadLine();
+        //            Console.Write("Valueを入力:");
+        //            var value = Console.ReadLine();
+        //            if (dict.ContainsKey(key))
+        //            {
+        //                dict[key].Add(value);
+        //            }
+        //            else
+        //            {
+        //                dict[key] = new List<string> { value };
+        //            }
+        //            Console.WriteLine($"登録しました!");
+        //        }
+        //        else if (flag == 2)
+        //        {
+        //            if (dict.Count == 0)
+        //            {
+        //                Console.WriteLine("表示するものがありません\n");
+        //                break;
+        //            }
+        //            foreach (var item in dict)
+        //            {
+        //                foreach (var term in item.Value)
+        //                {
+        //                    Console.WriteLine("{0} : {1}", item.Key, term);
+        //                }
+        //            }
+        //        }
+        //        else if( flag == 3)
+        //        {
+        //            break;
+        //        }
+        //    } while (true);
+        //}
+        #endregion
     }
 }
