@@ -100,7 +100,7 @@ namespace Chapter6
             #endregion
 
             var books = new List<Book> {
-         new Book { Title = "C#プログラミングの新常識", Price = 3800, Pages = 378 },
+         new Book { Title = "C#プログラミングの新常識C#", Price = 3800, Pages = 378 },
          new Book { Title = "ラムダ式とLINQの極意", Price = 2500, Pages = 312 },
          new Book { Title = "ワンダフル・C#ライフ", Price = 2900, Pages = 385 },
          new Book { Title = "一人で学ぶ並列処理プログラミング", Price = 4800, Pages = 464 },
@@ -160,6 +160,21 @@ namespace Chapter6
             }
             Console.WriteLine();
 
+            //全ての書籍から「C#」がいくつあるかカウントする
+            //Console.WriteLine($"C#が含まれる数：{books.Count(c => c.Title.Contains("C#"))}\n");
+
+            int counts = 0;
+
+            foreach (var book in books.Where(s => s.Title.Contains("C#")))
+            {
+                for (int i = 0; i < book.Title.Length; i++)
+                {
+                    if ((book.Title[i] == 'C') && (book.Title[i + 1] == '#'))
+                        counts++;
+                }                
+            }
+
+            Console.WriteLine($"C#が含まれる数は{counts}個です。");
         }
     }
 }
