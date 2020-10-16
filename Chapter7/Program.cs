@@ -74,6 +74,29 @@ namespace Chapter7
 
             Console.WriteLine("*****7.1.1*****");
             string text = "Cozy lummox gives smart squid who asks for job pen";
+
+            Exercise1_1(text);
+        }
+
+        static void Exercise1_1(string text)
+        {
+            //var dict = new Dictionary<char, int>();
+            var dict = new SortedDictionary<char, int>();
+            foreach (var item in text)
+            {                
+                var ch = char.ToUpper(item);
+
+                if ('A' <= ch && ch <= 'Z')
+                    if (dict.ContainsKey(ch))
+                        dict[ch]++;
+                    else
+                        dict[ch] = 1;                       
+            }
+            
+            foreach (var item in dict)
+            {
+                Console.WriteLine($"{item.Key} : {item.Value}");
+            }
             
         }
         #region
