@@ -1,16 +1,28 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Section03 {
+namespace Chapter7
+{
     // List 7-19
     // 略語と対応する日本語を管理するクラス
-    class Abbreviations {
-        private Dictionary<string, string> _dict = new Dictionary<string, string>();
+    class Abbreviations : IEnumerable<KeyValuePair<string, string>>
+    {
+        private static Dictionary<string, string> _dict = new Dictionary<string, string>();
 
+        //プロパティ
+        public int Count 
+        { 
+            get 
+            { 
+                return _dict.Count(); 
+            }
+        }
         // コンストラクタ
         public Abbreviations() {
             var lines = File.ReadAllLines("Abbreviations.txt");
@@ -41,6 +53,22 @@ namespace Section03 {
                 if (item.Value.Contains(substring))
                     yield return item;
             }
+        }
+
+        //Removeメソッド
+        public bool Remove(string text)
+        {
+            return _dict.Remove(text);                       
+        }
+
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+        {
+            return ((IEnumerable<KeyValuePair<string, string>>)_dict).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<KeyValuePair<string, string>>)_dict).GetEnumerator();
         }
     }
 }

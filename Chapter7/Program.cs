@@ -68,37 +68,90 @@ namespace Chapter7
             //{
             //    Console.WriteLine(item);
             //}
-            #endregion        
+            #endregion
+
+            var abbrs = new Abbreviations();
+
+            // Addメソッドの呼び出し例
+            abbrs.Add("IOC", "国際オリンピック委員会");
+            abbrs.Add("NPT", "核兵器不拡散条約");
+
+            //Countプロパティを呼び出す
+            Console.WriteLine(abbrs.Count);
+
+            //Removeメソッドを呼び出す
+            if(abbrs.Remove("NPT"))
+              Console.WriteLine("削除できました");
+            
+            else
+             Console.WriteLine("削除失敗");
+
+            
+
+
+            // インデクサの利用例
+            var names = new[] { "WHO", "FIFA", "NPT", };
+            foreach (var name in names)
+            {
+                var fullname = abbrs[name];
+                if (fullname == null)
+                    Console.WriteLine("{0}は見つかりません", name);
+                else
+                    Console.WriteLine("{0}={1}", name, fullname);
+            }
+            Console.WriteLine();
+
+            // ToAbbreviationメソッドの利用例
+            var japanese = "東南アジア諸国連合";
+            var abbreviation = abbrs.ToAbbreviation(japanese);
+            if (abbreviation == null)
+                Console.WriteLine("{0} は見つかりません", japanese);
+            else
+                Console.WriteLine("「{0}」の略語は {1} です", japanese, abbreviation);
+            Console.WriteLine();
+
+            // FindAllメソッドの利用例
+            foreach (var item in abbrs.FindAll("国際"))
+            {
+                Console.WriteLine("{0}={1}", item.Key, item.Value);
+            }
+            Console.WriteLine();
+
+            foreach (var item in abbrs.Where(s => s.Key.Length == 3))
+            {
+                Console.WriteLine($"{item.Key} = {item.Value}");
+            }
 
             //DuplicateKeySample();
 
-            Console.WriteLine("*****7.1.1*****");
-            string text = "Cozy lummox gives smart squid who asks for job pen";
+            //Console.WriteLine("*****7.1.1*****");
+            //string text = "Cozy lummox gives smart squid who asks for job pen";
 
-            Exercise1_1(text);
+            //Exercise1_1(text);
         }
+        #region
+        //static void Exercise1_1(string text)
+        //{
+        //    //var dict = new Dictionary<char, int>();
+        //    var dict = new SortedDictionary<char, int>();
+        //    foreach (var item in text)
+        //    {                
+        //        var ch = char.ToUpper(item);
 
-        static void Exercise1_1(string text)
-        {
-            //var dict = new Dictionary<char, int>();
-            var dict = new SortedDictionary<char, int>();
-            foreach (var item in text)
-            {                
-                var ch = char.ToUpper(item);
-
-                if ('A' <= ch && ch <= 'Z')
-                    if (dict.ContainsKey(ch))
-                        dict[ch]++;
-                    else
-                        dict[ch] = 1;                       
-            }
+        //        if ('A' <= ch && ch <= 'Z')
+        //            if (dict.ContainsKey(ch))
+        //                dict[ch]++;
+        //            else
+        //                dict[ch] = 1;                       
+        //    }
             
-            foreach (var item in dict)
-            {
-                Console.WriteLine($"{item.Key} : {item.Value}");
-            }
+        //    foreach (var item in dict)
+        //    {
+        //        Console.WriteLine($"{item.Key} : {item.Value}");
+        //    }
             
-        }
+        //}
+        #endregion
         #region
         //static public void DuplicateKeySample()
         //{
