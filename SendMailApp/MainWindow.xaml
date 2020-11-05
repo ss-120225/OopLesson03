@@ -47,8 +47,8 @@
         <TextBox x:Name="tbBody" Grid.Column="1" Grid.Row="4" Margin="10"/>
         
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="10" FontSize="10"/>
-            <Button x:Name="btOk" Content="送信" Width="100" Margin="10" FontSize="10"/>
+            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="10" FontSize="10" Click="btCancel_Click"/>
+            <Button x:Name="btOk" Content="送信" Width="100" Margin="10" FontSize="10" Click="btOk_Click"/>
         </StackPanel>
 
     </Grid>
