@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
     <Grid Background="Aquamarine">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -45,11 +45,11 @@
                    HorizontalAlignment="Right" Text="本文：" FontSize="20" Margin="4"/>
 
         <TextBox x:Name="tbBody" Grid.Column="1" Grid.Row="4" Margin="10"/>
-        
+
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="10" FontSize="10" Click="btCancel_Click"/>
             <Button x:Name="btOk" Content="送信" Width="100" Margin="10" FontSize="10" Click="btOk_Click"/>
         </StackPanel>
-
+        <Button x:Name="btConfig" Grid.Row="5" Margin="7" Content="設定" Click="btConfig_Click"/>
     </Grid>
 </Window>
