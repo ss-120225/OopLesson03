@@ -30,6 +30,7 @@ namespace SendMailApp
             //Config defaultData = cf.GetDefaultStatus();
             tbSmtp.Text = cf.Smtp;
             tbUserName.Text = tbUserName.Text = cf.MailAddress;
+            tbSender.Text = tbUserName.Text = cf.MailAddress;
             tbPassWord.Password = cf.PassWord;
             tbPort.Text = cf.Port.ToString();
             cbSsl.IsChecked = cf.Ssl;
@@ -43,18 +44,37 @@ namespace SendMailApp
                 tbUserName.Text, 
                 tbPassWord.Password,
                 int.Parse(tbPort.Text),
-                cbSsl.IsChecked??false
-                );
+                cbSsl.IsChecked??false);
         }
 
-        private void btCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        //OKボタン
         private void btOk_Click(object sender, RoutedEventArgs e)
         {
+            btApply_Click(sender, e);   //更新処理を呼び出す
+            this.Close();
+        }
 
+        //キャンセルボタン
+        private void btCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }        
+
+        private void tbUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        //ロード時に一度だけ呼び出される
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var cf = Config.GetInstance();
+
+            this.tbSmtp.Text = cf.Smtp;
+            this.tbUserName.Text = cf.MailAddress;
+            this.tbPassWord.Password = cf.PassWord;
+            this.tbPort.Text = cf.Port.ToString();
+            this.cbSsl.IsChecked = cf.Ssl;
         }
     }
 }
