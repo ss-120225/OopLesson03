@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,27 @@ namespace SendMailApp
            this.Ssl = ssl;
 
             return true;
+        }
+
+        //シリアル化
+        public void Serialise()
+        {
+            Config cf = new Config();
+            //using (System.IO.TextWriter writer = new System.IO.StreamWriter(Debug))
+            //{
+            //    // シリアル化の対象となるクラスの型を指定して XmlSerializerを作成する
+            //    System.Xml.Serialization.XmlSerializer serializer
+            //        = new System.Xml.Serialization.XmlSerializer(typeof(Config));
+
+            //    // 指定のオブジェクトをシリアル化する
+            //    serializer.Serialize(writer, instance);
+            //}
+        }
+
+        //逆シリアル化
+        public void DeSerialise()
+        {
+
         }
     }
 }
