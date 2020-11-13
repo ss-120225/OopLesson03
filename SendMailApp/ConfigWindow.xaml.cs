@@ -38,26 +38,60 @@ namespace SendMailApp
 
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
+
             (Config.GetInstance()).UpdateStatus
                 (
                 tbSmtp.Text,
-                tbUserName.Text, 
+                tbUserName.Text,
                 tbPassWord.Password,
                 int.Parse(tbPort.Text),
-                cbSsl.IsChecked??false);
+                cbSsl.IsChecked ?? false);
         }
 
         //OKボタン
         private void btOk_Click(object sender, RoutedEventArgs e)
         {
-            btApply_Click(sender, e);   //更新処理を呼び出す
-            this.Close();
+            Check(sender,e);                           
+        }
+
+        //確認処理
+        private void Check(object sender, RoutedEventArgs e)
+        {
+            if (tbSender.Text == "" || tbSmtp.Text == "" || int.Parse(tbPort.Text) == 0 || tbUserName.Text == "" || tbPassWord.Password == null)
+                MessageBox.Show("入力してください");
+            else
+            {
+                //更新処理を呼び出す 
+                btApply_Click(sender, e);
+                this.Close();
+            }
         }
 
         //キャンセルボタン
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var result = MessageBox.Show("確認", "変更されませんがよろしいですか", MessageBoxButton.OKCancel);
+
+            if(result == MessageBoxResult.OK)
+            {
+                var cf = Config.GetInstance();
+
+                this.tbSmtp.Text = cf.Smtp;
+                this.tbUserName.Text = cf.MailAddress;
+                this.tbPassWord.Password = cf.PassWord;
+                this.tbPort.Text = cf.Port.ToString();
+                this.cbSsl.IsChecked = cf.Ssl;
+                this.tbSender.Text = cf.MailAddress;
+
+                this.Close();
+            }
+
+            else
+            {
+                return;
+            }
+
+
         }        
 
         private void tbUserName_TextChanged(object sender, TextChangedEventArgs e)
@@ -75,6 +109,7 @@ namespace SendMailApp
             this.tbPassWord.Password = cf.PassWord;
             this.tbPort.Text = cf.Port.ToString();
             this.cbSsl.IsChecked = cf.Ssl;
+            this.tbSender.Text = cf.MailAddress;
         }
     }
 }

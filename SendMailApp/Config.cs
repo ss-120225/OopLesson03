@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.Serialization.Configuration;
 
 namespace SendMailApp
 {
@@ -67,6 +70,7 @@ namespace SendMailApp
            this.PassWord = passWord;
            this.Port = port;
            this.Ssl = ssl;
+            
 
             return true;
         }
@@ -74,22 +78,23 @@ namespace SendMailApp
         //シリアル化
         public void Serialise()
         {
-            Config cf = new Config();
-            //using (System.IO.TextWriter writer = new System.IO.StreamWriter(Debug))
-            //{
-            //    // シリアル化の対象となるクラスの型を指定して XmlSerializerを作成する
-            //    System.Xml.Serialization.XmlSerializer serializer
-            //        = new System.Xml.Serialization.XmlSerializer(typeof(Config));
-
-            //    // 指定のオブジェクトをシリアル化する
-            //    serializer.Serialize(writer, instance);
-            //}
+            
+            using (var writer = XmlWriter.Create("config.xml"))
+            {
+                var serializer = new XmlSerializer(instance.GetType());
+                // 指定のオブジェクトをシリアル化する
+                serializer.Serialize(writer, instance);
+            }
         }
 
         //逆シリアル化
         public void DeSerialise()
         {
-
+            using(var reader=XmlReader.Create("config.xml"))
+            {
+                var serializer = new XmlSerializer(typeof(Config));
+                instance = serializer.Deserialize(reader) as Config;
+            }
         }
     }
 }
