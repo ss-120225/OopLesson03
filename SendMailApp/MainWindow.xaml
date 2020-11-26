@@ -29,10 +29,10 @@
                    HorizontalAlignment="Left" Text="添付ファイル：" FontSize="16" Margin="4"/>
 
         <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" 
-                   HorizontalAlignment="Left" Content="追加" FontSize="12" Margin="4,10,0,0" Width="70"/>
+                   HorizontalAlignment="Left" Content="追加" FontSize="12" Margin="4,10,0,0" Width="70" Click="btAdd_Click"/>
 
         <Button Grid.Column="2" Grid.Row="3" VerticalAlignment="Top" 
-                   HorizontalAlignment="Left" Content="削除"  FontSize="12" Margin="4,10,0,0" Width="70"/>
+                   HorizontalAlignment="Left" Content="削除"  FontSize="12" Margin="4,10,0,0" Width="70" Click="btDelete_Click"/>
         
         <TextBox x:Name="tbTitle" Grid.Column="1" Grid.Row="0" Margin="10"/>
 
@@ -51,12 +51,15 @@
 
         <TextBox x:Name="tbBcc" Grid.Column="1" Grid.Row="3" Margin="10"/>
 
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
+            <ListBox Margin="100,10,10,10" Height="135" x:Name="tbPicture"/>
+        </StackPanel>
         <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" 
                    HorizontalAlignment="Right" Text="本文：" FontSize="20" Margin="4"/>
 
-        <TextBox x:Name="tbBody" Grid.Column="1" Grid.Row="4" Margin="10"/>
+        <TextBox x:Name="tbBody" Grid.Column="1" Grid.Row="4" Margin="10" Grid.ColumnSpan="2"/>
 
-        <TextBox x:Name="tbTempBody" Grid.Column="2" Grid.Row="4" Margin="10"/>
+        <!--<TextBox x:Name="tbTempBody" Grid.Column="2" Grid.Row="4" Margin="10"/>-->
         
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="10" FontSize="10" Click="btCancel_Click"/>

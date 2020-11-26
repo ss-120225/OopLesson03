@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace SendMailApp
     public partial class MainWindow : Window
     {
         SmtpClient sc = new SmtpClient();
+        public static string text = "";
 
         public MainWindow()
         {
@@ -46,9 +48,13 @@ namespace SendMailApp
         //メール送信処理
         private void btOk_Click(object sender, RoutedEventArgs e)
         {
+
             try
             {
+                Config cf = Config.GetInstance();
+
                 MailMessage msg = new MailMessage("ojsinfosys01@gmail.com", tbTo.Text);
+
                 if (tbCc.Text != "")
                     msg.CC.Add(tbCc.Text);
 
@@ -56,23 +62,29 @@ namespace SendMailApp
                     msg.Bcc.Add(tbBcc.Text);
 
                 msg.Subject = tbTitle.Text;
-                msg.Body = tbBody.Text;                
+                msg.Body = tbBody.Text;
                 //msg.Subject = tbTitle.Text;  //件名
                 //msg.Body = tbBody.Text;   //本文
-                
-                sc.Host = "smtp.gmail.com";  //SMTPサーバの設定
-                sc.Port = 587;
-                sc.EnableSsl = true;
+                //"smtp.gmail.com"
+                sc.Host = cf.Smtp;  //SMTPサーバの設定
+                sc.Port = cf.Port;
+                sc.EnableSsl = cf.Ssl;
                 sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");
                 
                 //sc.Send(msg);   //送信                
                 sc.SendMailAsync(msg);
+
+                foreach (var item in tbPicture.Items)
+                {
+                    msg.Attachments.Add(new Attachment(item.ToString()));
+                }
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
         //送信キャンセル処理
@@ -121,6 +133,29 @@ namespace SendMailApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //添付ファイルの画像を追加
+        private void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            //var text = "";
+            var ofd = new OpenFileDialog();
+            
+            if(ofd.ShowDialog() == true)
+            {
+                tbPicture.Items.Add(ofd.FileName);
+            }
+        }
+
+        //添付ファイルの画像を削除
+        private void btDelete_Click(object sender, RoutedEventArgs e)
+        {
+            tbPicture.Items.Clear();
         }
     }
 }
