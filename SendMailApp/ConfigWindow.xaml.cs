@@ -30,19 +30,20 @@ namespace SendMailApp
             //Config defaultData = cf.GetDefaultStatus();
             tbSmtp.Text = cf.Smtp;
             tbUserName.Text = tbUserName.Text = cf.MailAddress;
-            tbSender.Text = tbUserName.Text = cf.MailAddress;
+            tbSender.Text = tbSender.Text = cf.MailAddress;
             tbPassWord.Password = cf.PassWord;
             tbPort.Text = cf.Port.ToString();
             cbSsl.IsChecked = cf.Ssl;
         }
 
+        //適用
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
 
             (Config.GetInstance()).UpdateStatus
                 (
                 tbSmtp.Text,
-                tbUserName.Text,
+                tbSender.Text,
                 tbPassWord.Password,
                 int.Parse(tbPort.Text),
                 cbSsl.IsChecked ?? false);
